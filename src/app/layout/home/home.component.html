@@ -1,1 +1,80 @@
-<p>home works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">CondorChat</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    </div>
+    <form class="form-inline my-2 my-lg-0">
+        <label> {{session.user.name  }}</label>
+        <a class="nav-item nav-link" href="#">Configuracion</a>
+    </form>
+</nav>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-md-4 bg-white ">
+            <div class=" row border-bottom padding-sm" style="height: 40px;">
+                Groups
+            </div>
+            <ul class="friend-list">
+                <!-- <li class="active bounceInDown">
+                    <a class="clearfix">
+                        <img *ngIf="session.user.username === 'andres'" src="https://bootdey.com/img/Content/user_1.jpg"
+                            alt="User Avatar">
+                        <img *ngIf="session.user.username === 'pedro'" src="https://bootdey.com/img/Content/user_3.jpg"
+                            alt="User Avatar">
+                        <div class="friend-name">
+                            <strong>{{session.user.name}}</strong>
+                        </div>
+                    </a>
+                </li> -->
+                <li class="bounceInDown" (click)="selectUSerChat(user)" *ngFor="let user of users">
+                    <a class="clearfix">
+                        <img *ngIf="user.username === 'andres'" src="https://bootdey.com/img/Content/user_1.jpg"
+                            alt="User Avatar">
+                        <img *ngIf="user.username === 'pedro'" src="https://bootdey.com/img/Content/user_3.jpg"
+                            alt="User Avatar">
+                        <div class="friend-name">
+                            <strong>{{user.name}}</strong>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- selected chat -->
+        <div class="col-md-8 bg-white char-window ">
+            <div class="chat-message">
+                <ul class="chat">
+                    {{messages}}
+                    <li class="left clearfix" *ngFor="let message of messages">
+                        <span class="chat-img pull-left">
+                            <img *ngIf="message.userfrom === 'andres'" src="https://bootdey.com/img/Content/user_1.jpg"
+                                alt="User Avatar">
+                            <img *ngIf="message.userfrom === 'pedro'" src="https://bootdey.com/img/Content/user_3.jpg"
+                                alt="User Avatar">
+                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">{{message.user}}</strong>
+                            </div>
+                            <div>
+                                <p>{{message.msg}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="chat-box bg-white">
+                <div class="input-group"><input class="form-control border no-shadow no-rounded"
+                        placeholder="Type your message here" [(ngModel)]="message"
+                        (keyup)="$event.keyCode == 13 && sendMessage()" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-success no-rounded" (click)="sendMessage()" type="button">Send</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
