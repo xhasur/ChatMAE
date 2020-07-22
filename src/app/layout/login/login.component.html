@@ -1,0 +1,23 @@
+<div class="container" >
+  <form [formGroup]="formLogin" (ngSubmit)="submitLogin()" >
+    <div class="form-group">
+      <label for="exampleInputEmail1">User</label>
+      <input type="text" class="form-control" id="user" inputId="user" formControlName="user"  placeholder="User" ng-class="{'error': user.errors}" >
+      <div *ngIf="user.errors && user.dirty">
+        <p *ngIf="user.errors.required">
+           user is required
+        </p>
+    </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="password" inputId="password" formControlName="password" placeholder="Password">
+      <div *ngIf="password.errors && password.dirty">
+        <p *ngIf="password.errors.required">
+            password is requerid
+        </p>
+    </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+</div>
