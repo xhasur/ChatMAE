@@ -69,16 +69,28 @@ small,
   font-size: 85%;
 }
 
+.succes {
+  border: 1rem solid red;
+}
+
+.message-container {
+  border: 1px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
 .friend-list li a .chat-alert {
   position: absolute;
   right: 8px;
   top: 27px;
   font-size: 10px;
   padding: 3px 5px;
-}
-
-.chat-message {
-  //  padding: 60px 20px 115px;
 }
 
 .chat {

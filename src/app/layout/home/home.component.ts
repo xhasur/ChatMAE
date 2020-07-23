@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
         this.chatService.joinGroup(this.group);
       } else {
         this.chatService.join(message.userfrom, message.userTo);
-        this.selectedUSer = this.findUSer(message.userfrom);
+        //this.selectedUSer = this.findUSer(message.userfrom);
       }
     });
   }
