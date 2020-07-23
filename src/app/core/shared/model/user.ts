@@ -5,4 +5,5 @@ export class User {
   name?: string;
   user?: string;
   id?: string;
+  image?: string;
 }

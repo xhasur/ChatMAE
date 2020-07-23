@@ -7,6 +7,7 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     name: { type: String },
     id: { type: String },
+    image: { type: String },
   },
   { collection: "user" }
 );

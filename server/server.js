@@ -10,6 +10,7 @@ var io = require("socket.io")(server, { origins: "*:*" });
 
 //models
 const User = require("./models/user");
+const Room = require("./models/room");
 
 const cors = require("cors");
 app.use(cors());
@@ -17,6 +18,50 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //Api
+
+var arr = [
+  {
+    name: "andres lopez",
+    username: "andres",
+    password: "123",
+    id: "1",
+    image: "https://bootdey.com/img/Content/user_1.jpg",
+  },
+  {
+    name: "Pedro Palacio",
+    username: "pedro",
+    password: "456",
+    id: "2",
+    image: "https://www.bootdey.com/img/Content/user_3.jpg",
+  },
+  {
+    name: "Juan Andres",
+    username: "juan",
+    password: "789",
+    id: "3",
+    image: "https://www.bootdey.com/img/Content/user_6.jpg",
+  },
+  {
+    name: "Monia masso",
+    username: "monica",
+    password: "321",
+    id: "4",
+    image: "https://www.bootdey.com/img/Content/user_2.jpg",
+  },
+];
+var arrRooms = [{ name: "Software" }, { name: "Admin" }];
+
+mongoose.connect(url, { useNewUrlParser: true }, function (err) {
+  if (err) throw err;
+
+  User.insertMany(arr, function (error, result) {
+    console.log(error);
+  });
+
+  Room.insertMany(arrRooms, function (error, result) {
+    console.log(error);
+  });
+});
 
 app.post("/api/user/login", (req, res) => {
   mongoose.connect(url, { useNewUrlParser: true }, function (err) {
@@ -44,14 +89,26 @@ app.post("/api/user/login", (req, res) => {
   });
 });
 
-app.get("/api/user/login", (req, res) => {
-  res.send("Hello World!");
-});
-
 app.get("/api/user", (req, res) => {
   mongoose.connect(url, { useNewUrlParser: true }, function (err) {
     if (err) throw err;
     User.find().exec(function (err, response) {
+      if (err) {
+        return res.status(500).jsonp({
+          err: err,
+        });
+      }
+      return res.status(200).jsonp({
+        result: response,
+      });
+    });
+  });
+});
+
+app.get("/api/room", (req, res) => {
+  mongoose.connect(url, { useNewUrlParser: true }, function (err) {
+    if (err) throw err;
+    Room.find().exec(function (err, response) {
       if (err) {
         return res.status(500).jsonp({
           err: err,

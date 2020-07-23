@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     </div>
     <form class="form-inline my-2 my-lg-0">
-        <label> {{session.user.name  }}</label>
+        <label> <b>{{session.user.name  }}</b> </label>
         <a class="btn btn-dark mx-2" href="/configuration/{{session.user.id}}">configuration</a>
         <button type="button" class="btn btn-dark" (click)="logOut()">Log Out</button>
     </form>
@@ -16,35 +16,25 @@
     <div class="row">
         <div class="col-md-4 bg-white ">
             <div class=" row border-bottom padding-sm" style="height: 40px;">
-                Members
+                <b>Members</b>
             </div>
             <ul class="friend-list">
                 <li class="bounceInDown" (click)="selectUSerChat(user)" *ngFor="let user of users">
                     <a class="clearfix">
-                        <img *ngIf="user.username === 'andres'" src="https://bootdey.com/img/Content/user_1.jpg"
-                            alt="User Avatar">
-                        <img *ngIf="user.username === 'pedro'" src="https://bootdey.com/img/Content/user_3.jpg"
-                            alt="User Avatar">
+                        <img [src]="user.image" alt="User Avatar">
+
                         <div class="friend-name">
                             <strong>{{user.name}}</strong>
                         </div>
                     </a>
                 </li>
             </ul>
-            Groups
+            <label for=""><b>Groups</b></label>
             <ul class="friend-list">
-                <li class="bounceInDown" (click)="selectGroup('programmers')">
+                <li class="bounceInDown" (click)="selectGroup(room.name)" *ngFor="let room of rooms">
                     <a class="clearfix">
                         <div class="friend-name">
-                            <strong>Programmers</strong>
-                        </div>
-                    </a>
-                </li>
-                <li class="bounceInDown" (click)="selectGroup('Admin')">
-                    <a class="clearfix">
-
-                        <div class="friend-name">
-                            <strong> Admin</strong>
+                            <strong>{{room.name}}</strong>
                         </div>
                     </a>
                 </li>
@@ -53,13 +43,9 @@
         <div class="col-md-8 bg-white char-window ">
             <div class="chat-message">
                 <ul class="chat">
-                    {{messages}}
                     <li class="left clearfix" *ngFor="let message of messages">
                         <span class="chat-img pull-left">
-                            <img *ngIf="message.userfrom === 'andres'" src="https://bootdey.com/img/Content/user_1.jpg"
-                                alt="User Avatar">
-                            <img *ngIf="message.userfrom === 'pedro'" src="https://bootdey.com/img/Content/user_3.jpg"
-                                alt="User Avatar">
+                            <img [src]="message.image" alt="User Avatar">
                         </span>
                         <div class="chat-body clearfix">
                             <div class="header">

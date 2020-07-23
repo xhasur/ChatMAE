@@ -50,7 +50,7 @@ export class ConfigurationComponent implements OnInit {
       email: new FormControl(''),
       password: new FormControl(''),
       address: new FormControl(''),
-      phone: new FormControl(''),
+      image: new FormControl(''),
     });
   }
 
@@ -63,6 +63,6 @@ export class ConfigurationComponent implements OnInit {
     this.getControl('email').setValue(null);
     this.getControl('password').setValue(user.password);
     this.getControl('address').setValue(null);
-    this.getControl('phone').setValue(null);
+    this.getControl('image').setValue(user.image);
   }
 }

@@ -26,4 +26,12 @@ export class UserService {
       })
     );
   }
+
+  getRooms(): Observable<User> {
+    return this.http.get(`${this.urlLogin}/room`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
 }

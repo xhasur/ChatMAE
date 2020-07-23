@@ -3,4 +3,5 @@ export class Message {
   userTo?: string;
   userfrom?: string;
   room?: string;
+  image?: string;
 }

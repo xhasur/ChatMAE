@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from './../../core/shared/model/message';
+import { Room } from './../../core/shared/model/room';
 import { Session } from './../../core/shared/model/session';
 import { User } from './../../core/shared/model/user';
 import { ChatService } from './../../core/shared/services/chat.service';
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
   messages: Message[] = [];
   session: Session;
   users: User[];
+  rooms: Room[];
   allUsers: User[];
   selectedUSer: User;
   isGroup: boolean;
@@ -34,6 +36,7 @@ export class HomeComponent implements OnInit {
         userTo: null,
         userfrom: this.session.user.username,
         room: this.group,
+        image: this.session.user.image,
       };
       this.chatService.sendMessageToGroup(message);
     } else {
@@ -42,6 +45,7 @@ export class HomeComponent implements OnInit {
         msg: this.message,
         userTo: toUser,
         userfrom: this.session.user.username,
+        image: this.session.user.image,
       };
       this.chatService.sendMessage(message);
     }
@@ -52,7 +56,15 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.session = this.storageService.getCurrentSession();
     this.loadUsers();
+    this.loadRooms();
     this.loadMessages();
+  }
+
+  loadRooms(): void {
+    this.userService.getRooms().subscribe((response) => {
+      this.rooms = response['result'];
+      console.log('rooms', this.rooms);
+    });
   }
 
   loadUsers(): void {
@@ -97,7 +109,7 @@ export class HomeComponent implements OnInit {
     this.isGroup = true;
   }
 
-  logOut() {
+  logOut(): void {
     this.storageService.logout();
   }
 }
