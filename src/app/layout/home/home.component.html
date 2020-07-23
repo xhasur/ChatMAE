@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">CondorChat</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/users">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/configuration/{{session.user.id}}">configuration</a>
+            </li>
+        </ul>
+    </div>
+    <form class="form-inline my-2 my-lg-0">
+        <img class="img-user" [src]="session.user.image">
+        <label> <b>{{session.user.name  }}</b> </label>
+        <button type="button" class="btn btn-dark mx-2" (click)="logOut()">Log Out</button>
+    </form>
+</nav>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-md-4 bg-white ">
+            <div class=" row border-bottom padding-sm" style="height: 40px;">
+                <b>Members</b>
+            </div>
+            <ul class="friend-list">
+                <li class="bounceInDown" (click)="selectUSerChat(user)" *ngFor="let user of users">
+                    <a class="clearfix">
+                        <img [src]="user.image">
+
+                        <div class="friend-name">
+                            <strong>{{user.name}}</strong>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <label for=""><b>Groups</b></label>
+            <ul class="friend-list">
+                <li class="bounceInDown" (click)="selectGroup(room.name)" *ngFor="let room of rooms">
+                    <a class="clearfix">
+                        <div class="friend-name">
+                            <strong>{{room.name}}</strong>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8 bg-white char-window ">
+            <div class="chat-message">
+                <ul class="chat">
+                    <li class="left clearfix" *ngFor="let message of messages ; let i = index">
+                        <span class="chat-img pull-left">
+                            <img [src]="message.image">
+                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">{{message.userfrom}}</strong>
+                            </div>
+                            <div class="message-container ">
+                                <p>{{message.msg}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="chat-box bg-white">
+                <div class="input-group"><input class="form-control border no-shadow no-rounded"
+                        placeholder="..Select contact to write and write a message here" [(ngModel)]="message"
+                        (keyup)="$event.keyCode == 13 && sendMessage()" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-dark mx-2" (click)="sendMessage()" [disabled]="!selectedUSer"
+                            type="button">Send</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

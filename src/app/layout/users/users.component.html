@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="border-top my-3"></div>
+    <div class="btn-registro text-center">
+        <a class="btn  btn-dark mx-2 " href="/home"> Home</a>
+    </div>
+    <div class="col-12 p-2">
+        <table class="table table-condensed table-striped table-bordered" cdk-table [dataSource]="usersDataSource">
+
+            <ng-container cdkColumnDef="name">
+                <th cdk-header-cell *cdkHeaderCellDef> Name </th>
+                <td cdk-cell *cdkCellDef="let user"> {{user.name}} </td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="username">
+                <th cdk-header-cell *cdkHeaderCellDef> Username </th>
+                <td cdk-cell *cdkCellDef="let user"> {{user.username}} </td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="image">
+                <th cdk-header-cell *cdkHeaderCellDef> Image </th>
+                <td cdk-cell *cdkCellDef="let user">
+                    <img class="img-table" [src]="user.image">
+                </td>
+            </ng-container>
+            <thead>
+                <tr cdk-header-row *cdkHeaderRowDef="DisplayedColumns"></tr>
+            </thead>
+            <tbody>
+                <tr cdk-row *cdkRowDef="let row; columns: DisplayedColumns;"></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
