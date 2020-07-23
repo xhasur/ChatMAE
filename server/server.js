@@ -11,13 +11,12 @@ var io = require("socket.io")(server, { origins: "*:*" });
 //models
 const User = require("./models/user");
 const Room = require("./models/room");
+const historyChat = require("./models/history");
 
 const cors = require("cors");
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-//Api
 
 var arr = [
   {
@@ -51,6 +50,8 @@ var arr = [
 ];
 var arrRooms = [{ name: "Software" }, { name: "Admin" }];
 
+//var arrHistory = [{ id: "ap", history: "", from: "andres", to: "pepe" }];
+
 mongoose.connect(url, { useNewUrlParser: true }, function (err) {
   if (err) throw err;
 
@@ -61,7 +62,13 @@ mongoose.connect(url, { useNewUrlParser: true }, function (err) {
   Room.insertMany(arrRooms, function (error, result) {
     console.log(error);
   });
+
+  // historyChat.insertMany(arrHistory, function (error, result) {
+  //   console.log(error);
+  // });
 });
+
+//Api
 
 app.post("/api/user/login", (req, res) => {
   mongoose.connect(url, { useNewUrlParser: true }, function (err) {
@@ -147,6 +154,49 @@ app.put("/api/user/:id", (req, res) => {
       err,
       response
     ) {
+      if (err) {
+        return res.status(500).jsonp({
+          err: err,
+        });
+      }
+      return res.status(200).jsonp({
+        result: response,
+      });
+    });
+  });
+});
+
+app.put("/api/chat/:id", (req, res) => {
+  mongoose.connect(url, { useNewUrlParser: true }, function (err) {
+    if (err) throw err;
+    var id = req.params.id;
+    var history = req.body;
+    console.log(history);
+    historyChat
+      .update(
+        { id: id },
+        { id: id, history: history.messages },
+        { upsert: true }
+      )
+      .exec(function (err, response) {
+        console.log(err);
+        if (err) {
+          return res.status(500).jsonp({
+            err: err,
+          });
+        }
+        return res.status(200).jsonp({
+          result: response,
+        });
+      });
+  });
+});
+
+app.get("/api/chat/:id", (req, res) => {
+  mongoose.connect(url, { useNewUrlParser: true }, function (err) {
+    if (err) throw err;
+    var id = req.params.id;
+    historyChat.find({ id: id }).exec(function (err, response) {
       if (err) {
         return res.status(500).jsonp({
           err: err,

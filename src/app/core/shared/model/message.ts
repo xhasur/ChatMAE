@@ -1,5 +1,5 @@
 export class Message {
-  msg: string;
+  msg?: string;
   userTo?: string;
   userfrom?: string;
   room?: string;

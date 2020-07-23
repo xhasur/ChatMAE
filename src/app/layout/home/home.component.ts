@@ -49,7 +49,6 @@ export class HomeComponent implements OnInit {
       };
       this.chatService.sendMessage(message);
     }
-
     this.message = '';
   }
 
@@ -79,6 +78,7 @@ export class HomeComponent implements OnInit {
   loadMessages(): void {
     this.chatService.getMessages().subscribe((message: Message) => {
       this.messages.push(message);
+      this.saveChat(this.messages);
       if (this.isGroup) {
         this.chatService.joinGroup(this.group);
       } else {
@@ -88,18 +88,26 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  findUSer(username: string): User {
-    return this.allUsers.reduce(
-      (acc, tp) => (tp.username === username ? tp : acc),
-      null
-    );
+  saveChat(messages: Message[]): void {
+    const message = messages[0];
+    const room = message.room;
+    this.userService.updateChat(room, messages).subscribe();
   }
 
   selectUSerChat(user: User): void {
     this.isGroup = false;
     this.selectedUSer = user;
-    this.messages = [];
     this.chatService.join(user.username, this.session.user.username);
+    const room = this.getRoom(user.username, this.session.user.username);
+    this.userService.loadChat(room).subscribe((messages) => {
+      const messagesResult = messages['result'];
+      if (messagesResult.length > 0) {
+        const history = messagesResult[0].history;
+        this.messages = history;
+      } else {
+        this.messages = [];
+      }
+    });
   }
 
   selectGroup(group: string): void {
@@ -111,5 +119,22 @@ export class HomeComponent implements OnInit {
 
   logOut(): void {
     this.storageService.logout();
+  }
+
+  findUSer(username: string): User {
+    return this.allUsers.reduce(
+      (acc, tp) => (tp.username === username ? tp : acc),
+      null
+    );
+  }
+
+  sortAlphabets(text): string {
+    return text.split('').sort().join('');
+  }
+
+  getRoom(usertTo: string, userFrom: string): string {
+    const usernameLetter = usertTo.charAt(0);
+    const usernameToLetter = userFrom.charAt(0);
+    return this.sortAlphabets(usernameLetter + usernameToLetter);
   }
 }
