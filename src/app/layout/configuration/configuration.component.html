@@ -1,4 +1,4 @@
-<form [formGroup]="formConfig" novalidate autocomplete="off">
+<form [formGroup]="formConfig" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
     <div class="container">
         <div class="form-row">
             <div class="form-group col-md-6">

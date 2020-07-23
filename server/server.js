@@ -138,6 +138,27 @@ app.get("/api/user/:id", (req, res) => {
   });
 });
 
+app.put("/api/user/:id", (req, res) => {
+  mongoose.connect(url, { useNewUrlParser: true }, function (err) {
+    if (err) throw err;
+    var id = req.params.id;
+    var user = req.body.user;
+    User.updateOne({ id: id }, { $set: { image: user.image } }).exec(function (
+      err,
+      response
+    ) {
+      if (err) {
+        return res.status(500).jsonp({
+          err: err,
+        });
+      }
+      return res.status(200).jsonp({
+        result: response,
+      });
+    });
+  });
+});
+
 // socket io
 io.on("connection", function (socket) {
   socket.on("joinRoom", function (username) {

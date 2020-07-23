@@ -27,6 +27,14 @@ export class UserService {
     );
   }
 
+  updateUser(id: string, user: User): Observable<User> {
+    return this.http.put(`${this.urlLogin}/user/${id}`, { user }).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
   getRooms(): Observable<User> {
     return this.http.get(`${this.urlLogin}/room`).pipe(
       map((response) => {

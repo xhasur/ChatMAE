@@ -65,4 +65,11 @@ export class ConfigurationComponent implements OnInit {
     this.getControl('address').setValue(null);
     this.getControl('image').setValue(user.image);
   }
+
+  onSubmit(): void {
+    if (this.formConfig.valid) {
+      const user: User = this.formConfig.value;
+      this.userService.updateUser(this.user.id, user).subscribe();
+    }
+  }
 }
