@@ -60,3 +60,12 @@ Go to  http://localhost:4200  in your favorite browser , is possible to use any 
 * [Socket.io 2.0](https://socket.io/)
 * [Angular material cdk](https://material.angular.io/cdk/categories)
 ```
+
+
+#screenshots
+
+<img src="https://github.com/xhasur/ChatMAE/blob/master/screenshots/1.PNG" title="Responsive Mobile" alt="Responsive Mobile" width="100%" align="center" hspace="19" >
+<img src="https://github.com/xhasur/ChatMAE/blob/master/screenshots/2.PNG" title="Responsive Mobile" alt="Responsive Mobile" width="100%" align="center" hspace="19" >
+<img src="https://github.com/xhasur/ChatMAE/blob/master/screenshots/3.PNG" title="Responsive Mobile" alt="Responsive Mobile" width="100%" align="center" hspace="19" >
+<img src="https://github.com/xhasur/ChatMAE/blob/master/screenshots/4.PNG" title="Responsive Mobile" alt="Responsive Mobile" width="100%" align="center" hspace="19" >
+<img src="https://github.com/xhasur/ChatMAE/blob/master/screenshots/5.PNG" title="Responsive Mobile" alt="Responsive Mobile" width="100%" align="center" hspace="19" >
