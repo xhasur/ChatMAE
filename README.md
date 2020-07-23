@@ -49,8 +49,17 @@ node server/server.js
 
 Run server. Default in port 3000
 
-```
 Go to  http://localhost:4200  in your favorite browser , is possible to use any browser
+
+users => 
+ andres 
+ 123
+ 
+ pedro
+ 456
+
+```
+
 
 
 * [Express](https://expressjs.com/en/guide/routing.html)
