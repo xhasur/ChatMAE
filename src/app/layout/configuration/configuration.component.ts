@@ -58,7 +58,7 @@ export class ConfigurationComponent implements OnInit {
     return this.formConfig.get(control);
   }
 
-  setData(user: User) {
+  setData(user: User): void {
     this.getControl('name').setValue(user.name);
     this.getControl('email').setValue(null);
     this.getControl('password').setValue(user.password);
