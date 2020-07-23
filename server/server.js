@@ -212,7 +212,6 @@ app.get("/api/chat/:id", (req, res) => {
 // socket io
 io.on("connection", function (socket) {
   socket.on("joinRoom", function (username) {
-    console.log("joinRoom", username);
     socket.join(username);
   });
 
@@ -221,8 +220,6 @@ io.on("connection", function (socket) {
   });
 
   socket.on("chatMessage", (msg) => {
-    console.log("msg", msg.msg);
-    console.log("room", msg.room);
     io.to(msg.room).emit("message", msg);
   });
 });
