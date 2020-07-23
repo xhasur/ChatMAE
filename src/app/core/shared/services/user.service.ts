@@ -18,4 +18,12 @@ export class UserService {
       })
     );
   }
+
+  getUser(id: string): Observable<User> {
+    return this.http.get(`${this.urlLogin}/user/${id}`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
 }

@@ -64,6 +64,23 @@ app.get("/api/user", (req, res) => {
   });
 });
 
+app.get("/api/user/:id", (req, res) => {
+  mongoose.connect(url, { useNewUrlParser: true }, function (err) {
+    if (err) throw err;
+    var id = req.params.id;
+    User.find({ id: id }).exec(function (err, response) {
+      if (err) {
+        return res.status(500).jsonp({
+          err: err,
+        });
+      }
+      return res.status(200).jsonp({
+        result: response,
+      });
+    });
+  });
+});
+
 // socket io
 io.on("connection", function (socket) {
   socket.on("joinRoom", function (username) {
