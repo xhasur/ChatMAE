@@ -77,8 +77,8 @@ io.on("connection", function (socket) {
 
   socket.on("chatMessage", (msg) => {
     console.log("msg", msg.msg);
-    console.log("user", msg.userTo);
-    io.to(msg.userTo).emit("message", msg);
+    console.log("room", msg.room);
+    io.to(msg.room).emit("message", msg);
   });
 });
 

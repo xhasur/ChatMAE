@@ -16,7 +16,10 @@ export class HomeComponent implements OnInit {
   messages: Message[] = [];
   session: Session;
   users: User[];
+  allUsers: User[];
   selectedUSer: User;
+  isGroup: boolean;
+  group: string;
 
   constructor(
     private chatService: ChatService,
@@ -25,13 +28,24 @@ export class HomeComponent implements OnInit {
   ) {}
 
   sendMessage(): void {
-    const toUser = this.selectedUSer.username;
-    const message: Message = {
-      msg: this.message,
-      userTo: toUser,
-      userfrom: this.session.user.username,
-    };
-    this.chatService.sendMessage(message);
+    if (this.isGroup) {
+      const message: Message = {
+        msg: this.message,
+        userTo: null,
+        userfrom: this.session.user.username,
+        room: this.group,
+      };
+      this.chatService.sendMessageToGroup(message);
+    } else {
+      const toUser = this.selectedUSer.username;
+      const message: Message = {
+        msg: this.message,
+        userTo: toUser,
+        userfrom: this.session.user.username,
+      };
+      this.chatService.sendMessage(message);
+    }
+
     this.message = '';
   }
 
@@ -39,11 +53,11 @@ export class HomeComponent implements OnInit {
     this.session = this.storageService.getCurrentSession();
     this.loadUsers();
     this.loadMessages();
-    this.chatService.join(this.session.user.username);
   }
 
   loadUsers(): void {
     this.userService.getUsers().subscribe((response) => {
+      this.allUsers = response['result'];
       this.users = response['result'].filter((user) => {
         return user.username !== this.session.user.username;
       });
@@ -53,13 +67,37 @@ export class HomeComponent implements OnInit {
   loadMessages(): void {
     this.chatService.getMessages().subscribe((message: Message) => {
       this.messages.push(message);
-      console.log(message);
+      if (this.isGroup) {
+        this.chatService.joinGroup(this.group);
+      } else {
+        this.chatService.join(message.userfrom, message.userTo);
+        this.selectedUSer = this.findUSer(message.userfrom);
+      }
     });
   }
 
+  findUSer(username: string): User {
+    return this.allUsers.reduce(
+      (acc, tp) => (tp.username === username ? tp : acc),
+      null
+    );
+  }
+
   selectUSerChat(user: User): void {
+    this.isGroup = false;
     this.selectedUSer = user;
     this.messages = [];
-    this.chatService.join(user.username);
+    this.chatService.join(user.username, this.session.user.username);
+  }
+
+  selectGroup(group: string): void {
+    this.messages = [];
+    this.chatService.joinGroup(group);
+    this.group = group;
+    this.isGroup = true;
+  }
+
+  logOut() {
+    this.storageService.logout();
   }
 }

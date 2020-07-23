@@ -8,27 +8,17 @@
     </div>
     <form class="form-inline my-2 my-lg-0">
         <label> {{session.user.name  }}</label>
-        <a class="nav-item nav-link" href="#">Configuracion</a>
+        <a class="btn btn-dark mx-2" href="/configuration/{{session.user.id}}">configuration</a>
+        <button type="button" class="btn btn-dark" (click)="logOut()">Log Out</button>
     </form>
 </nav>
 <div class="container bootstrap snippet">
     <div class="row">
         <div class="col-md-4 bg-white ">
             <div class=" row border-bottom padding-sm" style="height: 40px;">
-                Groups
+                Members
             </div>
             <ul class="friend-list">
-                <!-- <li class="active bounceInDown">
-                    <a class="clearfix">
-                        <img *ngIf="session.user.username === 'andres'" src="https://bootdey.com/img/Content/user_1.jpg"
-                            alt="User Avatar">
-                        <img *ngIf="session.user.username === 'pedro'" src="https://bootdey.com/img/Content/user_3.jpg"
-                            alt="User Avatar">
-                        <div class="friend-name">
-                            <strong>{{session.user.name}}</strong>
-                        </div>
-                    </a>
-                </li> -->
                 <li class="bounceInDown" (click)="selectUSerChat(user)" *ngFor="let user of users">
                     <a class="clearfix">
                         <img *ngIf="user.username === 'andres'" src="https://bootdey.com/img/Content/user_1.jpg"
@@ -41,9 +31,25 @@
                     </a>
                 </li>
             </ul>
-        </div>
+            Groups
+            <ul class="friend-list">
+                <li class="bounceInDown" (click)="selectGroup('programmers')">
+                    <a class="clearfix">
+                        <div class="friend-name">
+                            <strong>Programmers</strong>
+                        </div>
+                    </a>
+                </li>
+                <li class="bounceInDown" (click)="selectGroup('Admin')">
+                    <a class="clearfix">
 
-        <!-- selected chat -->
+                        <div class="friend-name">
+                            <strong> Admin</strong>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="col-md-8 bg-white char-window ">
             <div class="chat-message">
                 <ul class="chat">
@@ -57,7 +63,7 @@
                         </span>
                         <div class="chat-body clearfix">
                             <div class="header">
-                                <strong class="primary-font">{{message.user}}</strong>
+                                <strong class="primary-font">{{message.userfrom}}</strong>
                             </div>
                             <div>
                                 <p>{{message.msg}}</p>
