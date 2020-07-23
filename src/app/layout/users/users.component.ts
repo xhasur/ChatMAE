@@ -21,8 +21,6 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUsers().subscribe((response) => {
       const uSerResponse: User[] = response['result'];
-      console.log(uSerResponse);
-
       this.usersDataSource.next(uSerResponse);
     });
   }

@@ -62,7 +62,6 @@ export class HomeComponent implements OnInit {
   loadRooms(): void {
     this.chatService.getRooms().subscribe((response) => {
       this.rooms = response['result'];
-      console.log('rooms', this.rooms);
     });
   }
 
