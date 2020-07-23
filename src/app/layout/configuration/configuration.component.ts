@@ -47,9 +47,8 @@ export class ConfigurationComponent implements OnInit {
   initForm(): void {
     this.formConfig = this.formBuild.group({
       name: new FormControl(''),
-      email: new FormControl(''),
+      username: new FormControl(''),
       password: new FormControl(''),
-      address: new FormControl(''),
       image: new FormControl(''),
     });
   }
@@ -60,9 +59,8 @@ export class ConfigurationComponent implements OnInit {
 
   setData(user: User): void {
     this.getControl('name').setValue(user.name);
-    this.getControl('email').setValue(null);
+    this.getControl('username').setValue(user.username);
     this.getControl('password').setValue(user.password);
-    this.getControl('address').setValue(null);
     this.getControl('image').setValue(user.image);
   }
 

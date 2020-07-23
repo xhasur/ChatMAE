@@ -5,11 +5,19 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/users">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/configuration/{{session.user.id}}">configuration</a>
+            </li>
+        </ul>
     </div>
     <form class="form-inline my-2 my-lg-0">
+        <img class="img-user" [src]="session.user.image">
         <label> <b>{{session.user.name  }}</b> </label>
-        <a class="btn btn-dark mx-2" href="/configuration/{{session.user.id}}">configuration</a>
-        <button type="button" class="btn btn-dark" (click)="logOut()">Log Out</button>
+        <button type="button" class="btn btn-dark mx-2" (click)="logOut()">Log Out</button>
     </form>
 </nav>
 <div class="container bootstrap snippet">
@@ -21,7 +29,7 @@
             <ul class="friend-list">
                 <li class="bounceInDown" (click)="selectUSerChat(user)" *ngFor="let user of users">
                     <a class="clearfix">
-                        <img [src]="user.image" alt="User Avatar">
+                        <img [src]="user.image">
 
                         <div class="friend-name">
                             <strong>{{user.name}}</strong>
@@ -45,7 +53,7 @@
                 <ul class="chat">
                     <li class="left clearfix" *ngFor="let message of messages ; let i = index">
                         <span class="chat-img pull-left">
-                            <img [src]="message.image" alt="User Avatar">
+                            <img [src]="message.image">
                         </span>
                         <div class="chat-body clearfix">
                             <div class="header">
@@ -60,10 +68,10 @@
             </div>
             <div class="chat-box bg-white">
                 <div class="input-group"><input class="form-control border no-shadow no-rounded"
-                        placeholder="Type your message here" [(ngModel)]="message"
+                        placeholder="..Select contact to write and write a message here" [(ngModel)]="message"
                         (keyup)="$event.keyCode == 13 && sendMessage()" />
                     <span class="input-group-btn">
-                        <button class="btn btn-success no-rounded" (click)="sendMessage()" [disabled]="!selectedUSer"
+                        <button class="btn btn-dark mx-2" (click)="sendMessage()" [disabled]="!selectedUSer"
                             type="button">Send</button>
                     </span>
                 </div>

@@ -20,28 +20,28 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 var arr = [
   {
-    name: "andres lopez",
+    name: "Andres Lopez Restrepo",
     username: "andres",
     password: "123",
     id: "1",
     image: "https://bootdey.com/img/Content/user_1.jpg",
   },
   {
-    name: "Pedro Palacio",
+    name: "Pedro Palacio Puerta",
     username: "pedro",
     password: "456",
     id: "2",
     image: "https://www.bootdey.com/img/Content/user_3.jpg",
   },
   {
-    name: "Juan Andres",
+    name: "Juan Andres Perez",
     username: "juan",
     password: "789",
     id: "3",
     image: "https://www.bootdey.com/img/Content/user_6.jpg",
   },
   {
-    name: "Monia masso",
+    name: "Monica Masso U",
     username: "monica",
     password: "321",
     id: "4",
@@ -49,8 +49,6 @@ var arr = [
   },
 ];
 var arrRooms = [{ name: "Software" }, { name: "Admin" }];
-
-//var arrHistory = [{ id: "ap", history: "", from: "andres", to: "pepe" }];
 
 mongoose.connect(url, { useNewUrlParser: true }, function (err) {
   if (err) throw err;
@@ -62,6 +60,8 @@ mongoose.connect(url, { useNewUrlParser: true }, function (err) {
   Room.insertMany(arrRooms, function (error, result) {
     console.log(error);
   });
+
+  //var arrHistory = [{ id: "ap", history: "", from: "andres", to: "pepe" }];
 
   // historyChat.insertMany(arrHistory, function (error, result) {
   //   console.log(error);

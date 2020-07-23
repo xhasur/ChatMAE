@@ -83,7 +83,6 @@ export class HomeComponent implements OnInit {
         this.chatService.joinGroup(this.group);
       } else {
         this.chatService.join(message.userfrom, message.userTo);
-        //this.selectedUSer = this.findUSer(message.userfrom);
       }
     });
   }
@@ -115,6 +114,15 @@ export class HomeComponent implements OnInit {
     this.chatService.joinGroup(group);
     this.group = group;
     this.isGroup = true;
+    this.userService.loadChat(group).subscribe((messages) => {
+      const messagesResult = messages['result'];
+      if (messagesResult.length > 0) {
+        const history = messagesResult[0].history;
+        this.messages = history;
+      } else {
+        this.messages = [];
+      }
+    });
   }
 
   logOut(): void {
