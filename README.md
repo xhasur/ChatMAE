@@ -53,10 +53,10 @@ Run server. Default in port 3000
 Go to  http://localhost:4200  in your favorite browser , is possible to use any browser
 
 
-* [Express](https://expressjs.com/en/guide/routing.html) Express
-* [bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/) Bootstrap
-* [Mongoose](https://mongoosejs.com/docs/guide.html) Mongoose
-* [Angular ](https://angular.io/docs) Angular
-* [Socket.io 2.0](https://socket.io/) - Socket Io
-* [Angular material cdk](https://material.angular.io/cdk/categories) Angular Cdk
+* [Express](https://expressjs.com/en/guide/routing.html)
+* [bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+* [Mongoose](https://mongoosejs.com/docs/guide.html)
+* [Angular ](https://angular.io/docs)
+* [Socket.io 2.0](https://socket.io/)
+* [Angular material cdk](https://material.angular.io/cdk/categories)
 ```
