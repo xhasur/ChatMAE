@@ -24,7 +24,7 @@ export class StorageService {
   }
 
   loadSessionData(): Session {
-    var sessionStr = this.localStorageService.getItem('currentUser');
+    const sessionStr = this.localStorageService.getItem('currentUser');
     return sessionStr ? <Session>JSON.parse(sessionStr) : null;
   }
 
@@ -34,7 +34,7 @@ export class StorageService {
   }
 
   getCurrentToken(): string {
-    var session = this.getCurrentSession();
+    const session = this.getCurrentSession();
     return session && session.token ? session.token : null;
   }
 

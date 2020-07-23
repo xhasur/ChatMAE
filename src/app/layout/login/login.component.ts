@@ -18,7 +18,7 @@ import { StorageService } from './../../core/shared/services/storage.service';
 })
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
-
+  error: boolean;
   constructor(
     private formBuild: FormBuilder,
     private authenticationService: AuthenticationService,
@@ -45,9 +45,13 @@ export class LoginComponent implements OnInit {
           if (response['status'] === 'success') {
             const userLogued = response['data'][0];
             this.login(userLogued);
+          } else {
+            this.error = true;
           }
         },
-        (error) => {}
+        (error) => {
+          console.log(error);
+        }
       );
     }
   }

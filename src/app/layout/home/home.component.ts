@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadRooms(): void {
-    this.userService.getRooms().subscribe((response) => {
+    this.chatService.getRooms().subscribe((response) => {
       this.rooms = response['result'];
       console.log('rooms', this.rooms);
     });
@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
   saveChat(messages: Message[]): void {
     const message = messages[0];
     const room = message.room;
-    this.userService.updateChat(room, messages).subscribe();
+    this.chatService.updateChat(room, messages).subscribe();
   }
 
   selectUSerChat(user: User): void {
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
     this.selectedUSer = user;
     this.chatService.join(user.username, this.session.user.username);
     const room = this.getRoom(user.username, this.session.user.username);
-    this.userService.loadChat(room).subscribe((messages) => {
+    this.chatService.loadChat(room).subscribe((messages) => {
       const messagesResult = messages['result'];
       if (messagesResult.length > 0) {
         const history = messagesResult[0].history;
@@ -114,7 +114,7 @@ export class HomeComponent implements OnInit {
     this.chatService.joinGroup(group);
     this.group = group;
     this.isGroup = true;
-    this.userService.loadChat(group).subscribe((messages) => {
+    this.chatService.loadChat(group).subscribe((messages) => {
       const messagesResult = messages['result'];
       if (messagesResult.length > 0) {
         const history = messagesResult[0].history;

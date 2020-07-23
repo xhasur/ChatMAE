@@ -60,12 +60,6 @@ mongoose.connect(url, { useNewUrlParser: true }, function (err) {
   Room.insertMany(arrRooms, function (error, result) {
     console.log(error);
   });
-
-  //var arrHistory = [{ id: "ap", history: "", from: "andres", to: "pepe" }];
-
-  // historyChat.insertMany(arrHistory, function (error, result) {
-  //   console.log(error);
-  // });
 });
 
 //Api
